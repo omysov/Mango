@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CouponDto>
+
+<html>
+	<head>
+
+	</head>
+	<body>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Coupon Code</th>
+                <th scope="col">Discount Amount</th>
+                <th scope="col">Minimum Amount</th>
+            </tr>
+           </thead>
+            @{
+                foreach(var item in Model)
+                {
+                    <tr>
+                        <th scope="row"></th>
+                        <td>@item.CouponCode</td>
+                        <td>@((item.DiscountAmount).ToString("c"))</td>
+                        <td>@((item.MinAmount).ToString("c"))</td>
+                        <td><a class="btn btn-danger" asp-action="CouponDelete" asp-route-couponId="@item.CouponId" role="button">Delete</a></td>
+                    </tr>
+                }
+            }
+
+            </tbody>
+        </table>
+                            <div class="d-flex gap-2 mb-3">
+                                <a class="btn btn-primary" asp-action="CouponCreate" role="button">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+
+                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
+
+                                </svg>
+                                  CouponCreate
+                                </a>
+                        </div>
+	</body>
+</html>
