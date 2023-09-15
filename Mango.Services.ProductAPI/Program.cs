@@ -1,14 +1,13 @@
 using AutoMapper;
-using Mango.Servicec.CouponAPI;
-using Mango.Servicec.CouponAPI.Data;
-using Mango.Services.CouponAPI.Extension;
-using Mango.Web.Utility;
+using Mango.Services.ProductAPI.Extension;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System.Text;
+using Mango.Servicec.ProductAPI.Data;
+using Mango.Servicec.ProductAPI;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,12 +21,12 @@ IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
-SD.CouponAPIBase = builder.Configuration["ServiceUrls:CouponAPI"];
+//SD.CouponAPIBase = builder.Configuration["ServiceUrls:CouponAPI"];
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen( option =>
+builder.Services.AddSwaggerGen(option =>
 {
     option.AddSecurityDefinition(name: JwtBearerDefaults.AuthenticationScheme, securityScheme: new OpenApiSecurityScheme
     {
@@ -54,8 +53,8 @@ builder.Services.AddSwaggerGen( option =>
         }
     });
 });
-
 builder.AddAppAuthetication();
+
 
 builder.Services.AddAuthorization();
 
@@ -82,7 +81,7 @@ void ApplyMigration()
     {
         var _db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-        if(_db.Database.GetPendingMigrations().Count() > 0)
+        if (_db.Database.GetPendingMigrations().Count() > 0)
         {
             _db.Database.Migrate();
         }
