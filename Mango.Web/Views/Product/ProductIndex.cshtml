@@ -1,5 +1,46 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model IEnumerable<ProductDto>
+
+<html>
+	<head>
+
+	</head>
+	<body>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Category Name</th>
+                <th scope="col">Price</th>
+            </tr>
+           </thead>
+            @{
+                foreach(var item in Model)
+                {
+                    <tr>
+                        <th scope="row"></th>
+                        <td>@item.Name</td>
+                        <td>@item.CategoryName</td>
+                        <td>@((item.Price).ToString("c"))</td>
+                        <td>
+                            <a class="btn btn-success" asp-action="ProductEdit" asp-route-productId="@item.ProductId" role="button">Edit</a>
+                            <a class="btn btn-danger" asp-action="ProductDelete" asp-route-productId="@item.ProductId" role="button">Delete</a>
+                        </td>
+                    </tr>
+                }
+            }
+
+            </tbody>
+        </table>
+                            <div class="d-flex gap-2 mb-3">
+                                <a class="btn btn-primary" asp-action="ProductCreate" role="button">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+
+                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
+
+                                </svg>
+                                  ProductCreate
+                                </a>
+                        </div>
+	</body>
+</html>
