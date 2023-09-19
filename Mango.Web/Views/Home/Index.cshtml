@@ -1,8 +1,26 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model IEnumerable<ProductDto>;
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<form>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        @{
+            foreach(var product in Model)
+            {
+               <div class="col">
+                 <div class="card" style="width: 18rem;">
+                  <img src="https://imgholder.ru/323x300/9dbf16/fff&text=image" class="card-img-top" alt="...">
+                  <div class="card-body">
+                    <h2>@string.Format("{0:c}", product.Price)</h2>
+                    <h5 class="card-title">@product.Name</h5>
+                    <h6 class="card-subtitle mb-2 text-body-secondary">@product.CategoryName</h6>
+                    <p class="card-text">@Html.Raw(product.Description)</p>
+                    <a asp-action="ProductDetails" asp-route-productId="@product.ProductId" class="btn btn-primary">Details</a>  
+                  </div>
+                </div>
+               </div>
+            }
+        }
+    </div>
+</form>
