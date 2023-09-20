@@ -12,6 +12,7 @@
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Category Name</th>
+                <th scope="col">Count</th>
                 <th scope="col">Price</th>
             </tr>
            </thead>
@@ -26,6 +27,7 @@
                                 </td>
                                 <td>@cartObj.Product.Name</td>
                                 <td>@cartObj.Product.CategoryName</td>
+                                <td>@cartObj.Count</td>
                                 <td>@((cartObj.Product.Price).ToString("c"))</td>
                                 <td>
                                     <a class="btn btn-danger" asp-action="Remove" asp-route-cartDetailsId="@cartObj.CartDetailsId" role="button">Delete</a>
@@ -43,21 +45,10 @@
         <button type="submit" class="btn btn-sm btn-success">Apply</button>
       </div>
       <div class="col-6 text-end">
-        <span class="text-danger" style="font-size:21px;"> Order Total : <br /></span>
-        <span class="text-success"> Order Discount :</span>
+        <span class="text-danger" style="font-size:21px;"> Order Total : @Model.CartHeader.CartTotal<br /></span>
+        <span class="text-success"> Order Discount : @Model.CartHeader.Discount</span>
       </div>
     </div>
-          <br />                  
-         <div class="d-flex gap-2 mb-3">
-                                <a class="btn btn-primary" asp-action="ProductCreate" role="button">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
-
-                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
-
-                                </svg>
-                                  ProductCreate
-                                </a>
-                        </div>
     </body>
 </html>
 </form>
